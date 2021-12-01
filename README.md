@@ -26,7 +26,7 @@ The following libraries are needed for the base model:
 * cuda
 
 ### Recommendations
-We recommend you to run our code on a VM or a large computer node with 8 cores, 4 gpus, and uninterrupted 15 hours running time for model training. 
+We recommend you to run our code on a VM or a large computer node with 8 cores, 4 gpus, and uninterrupted 15 hours running time for model training. Estimated run time should be no less than 8-10 hours as our project uses model that is not pre-trained. 
 
 ## Steps
 
