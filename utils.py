@@ -45,9 +45,9 @@ def path_for(train=False, val=False, test=False, question=False, answer=False):
     assert question + answer == 1
     assert not (test and answer), 'loading answers from test split not supported'  # if you want to eval on test, you need to implement loading of a VQA Dataset without given answers yourself
     if train:
-        split = 'train2014'
+        split = 'train2015'
     elif val:
-        split = 'val2014'
+        split = 'val2015'
     else:
         split = 'test2015'
     if question:
