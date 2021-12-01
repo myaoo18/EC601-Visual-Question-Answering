@@ -1,62 +1,87 @@
-# Strong baseline for visual question answering
+# EC601-Visual-Question-Answering
+## Team Memebers
+* Jae Yoon Chung
+* Mandy Yao
+* Yunlu Deng
+* Zifei Lu
 
-This is a re-implementation of Vahid Kazemi and Ali Elqursh's paper [Show, Ask, Attend, and Answer: A Strong Baseline For Visual Question Answering][0] in [PyTorch][1].
+## Overview
+This project aims to reimplement the baseline of VQA from Vahid Kazemi and Ali Elqursh’s paper, "Show, Ask, Attend, and Answer: A Strong Baseline For Visual Question Answering", by building upon the base code https://github.com/Cyanogenoid/pytorch-vqa and to advance the training model by using different modules such as resnet50, resnet101, resnet152, retinanet on resnet101 and retinanet on resnet152. We were able to compare the graphical results in train_results folder and found that the most efficient model was retinanet on resnet101. We then used the weight of this trained model and tested samples of image and question. Overall, this project improved the base code with a greater accuracy model, made changes to the upstream code with Cuda and excluding deprecated packages in mind, and implementation testing. 
 
-The paper shows that with a relatively simple model, using only common building blocks in Deep Learning, you can get better accuracies than the majority of previously published work on the popular [VQA v1][2] dataset.
+We would like to give our sincere gratitute to:
+* Vahid Kazemi and Ali Elqursh for their detailed paper
+* Yan Zhang, Yangyang Guo, Peter Plantinga, Mantas Bandonis for their code base https://github.com/Cyanogenoid/pytorch-vqa
+* Dan He, Duke Lin, Sneha Kondur and Tyler Farnan for their testing method https://github.com/dukelin95/vqa_pytorch
 
-This repository is intended to provide a straightforward implementation of the paper for other researchers to build on.
-The results closely match the reported results, as the majority of details should be exactly the same as the paper. (Thanks to the authors for answering my questions about some details!)
-This implementation seems to consistently converge to about 0.1% better results –
-there are two main implementation differences:
+Please find more detailed citation at the end of this ReadMe. Moreover, this project aims to provide simple analysis of the results for future researchers to build on. 
 
-- Instead of setting a limit on the maximum number of words per question and cutting off all words beyond this limit, this code uses per-example dynamic unrolling of the language model.
-- [An issue with the official evaluation code](https://github.com/Cyanogenoid/pytorch-vqa/issues/5) makes some questions unanswerable. This code does not normalize machine-given answers, which avoids this problem. As the vast majority of questions are not affected by this issue, it's very unlikely that this will have any significant impact on accuracy.
+## Requirements
+The following libraries are needed for the base model:
+* torch
+* torchvision
+* h5py
+* tqdm
+* python3/3.8.10
+* pytorch
+* cuda
 
-A fully trained model (convergence shown below) is [available for download][5].
+### Recommendations
+We recommend you to run our code on a VM or a large computer node with 8 cores, 4 gpus, and uninterrupted 15 hours running time for model training. 
 
-![Graph of convergence of implementation versus paper results](http://i.imgur.com/moWYEm8.png)
+## Steps
 
-Note that the model in [my other VQA repo](https://github.com/Cyanogenoid/vqa-counting) performs better than the model implemented here.
+To run the base model, you should follow these steps:
 
+1) Create a directory where you will save this project and create git by typing `git init` in the terminal
+2) Clone the repository to your computer by running `git clone -b master https://github.com/myaoo18/EC601-Visual-Question-Answering.git`. Make sure that you clone the Master branch
+3) Download the [mscoco dataset](https://visualqa.org/vqa_v1_download.html), and set their paths in `config.py`
+* qa_path should contain the files `OpenEnded_mscoco_train2014_questions.json`, `OpenEnded_mscoco_val2014_questions.json`, `mscoco_train2014_annotations.json`, `mscoco_val2014_annotations.json`.
+* train_path, val_path and test_path should contain the directory of training, validation and test images respectively. Please download them here: https://visualqa.org/vqa_v1_download.html using VQA 1.0
+* Pre-process the images and vocabularies. (Before doing this, you can customize the number of layers of resnet. We used resnet152, resnet101, resnet50 respectively to test the performance of base model). You may modify line 18 to play around with the different resnet models. 
 
-## Running the model
-
-- Clone this repository with:
-```
-git clone https://github.com/Cyanogenoid/pytorch-vqa --recursive
-```
-- Set the paths to your downloaded [questions, answers, and MS COCO images][4] in `config.py`.
-  - `qa_path` should contain the files `OpenEnded_mscoco_train2014_questions.json`, `OpenEnded_mscoco_val2014_questions.json`, `mscoco_train2014_annotations.json`, `mscoco_val2014_annotations.json`.
-  - `train_path`, `val_path`, `test_path` should contain the train, validation, and test `.jpg` images respectively.
-- Pre-process images (93 GiB of free disk space required for f16 accuracy) with [ResNet152 weights ported from Caffe][3] and vocabularies for questions and answers with:
-```
+```shell
 python preprocess-images.py
 python preprocess-vocab.py
 ```
-- Train the model in `model.py` with:
-```
+
+* Train the model with:
+
+```shell
 python train.py
 ```
-This will alternate between one epoch of training on the train split and one epoch of validation on the validation split while printing the current training progress to stdout and saving logs in the `logs` directory.
-The logs contain the name of the model, training statistics, contents of `config.py`,  model weights, evaluation information (per-question answer and accuracy), and question and answer vocabularies.
-- During training (which takes a while), plot the training progress with:
-```
-python view-log.py <path to .pth log>
-```
 
+The default number of training epochs is 50 (indexed from 0 to 49). The result (`*.pth` file) will be saved to `logs` directory. You can plot diagram to visualize the result.
 
-## Python 3 dependencies (tested on Python 3.6.2)
+## Set Backs
 
-- torch
-- torchvision
-- h5py
-- tqdm
+Before successfully running the base model, we encountered several problems:
 
+* At first we ran the model on BU SCC platform without GPU cores, thus making the training speed extremely slow. Therefore, we switched to Google Colab to run base model. However, the connection to Colab is unstable and has limited training time, so that we cannot get the time-consuming training job done. Finally, we solved this issue by asking for GPU cores in the BU SCC platform, so we can use cuda to speed up the training process.
+* We encountered some permission issues when installing libraries and running the model on SCC platform, because the base model code involves a lot of reading and writing operations. We solved this by operating `chmod` on all files to give permissions.
+* As some of the code of base model is out of date, we modified these code when reimplementing it. Specifically, preprocess-images.py, config.py, data.py, train.py and utils.py.
 
+## Conclusion
+Resnet 50:  
+![alt text](https://github.com/myaoo18/EC601-Visual-Question-Answering/blob/master/train_results/ResNet_resnet50_50epoch.png?raw=true)  
 
-[0]: https://arxiv.org/abs/1704.03162
-[1]: https://github.com/pytorch/pytorch
-[2]: http://visualqa.org/
-[3]: https://github.com/ruotianluo/pytorch-resnet
-[4]: http://visualqa.org/vqa_v1_download.html
-[5]: https://github.com/Cyanogenoid/pytorch-vqa/releases
+Resnet 101:  
+![alt text](https://github.com/myaoo18/EC601-Visual-Question-Answering/blob/master/train_results/ResNet_resnet101_50epoch.png?raw=true)  
+
+Resnet 152:  
+![alt text](https://github.com/myaoo18/EC601-Visual-Question-Answering/blob/master/train_results/ResNet_resnet152_50epoch.png?raw=true)  
+
+RetinaNet with resnet 101:  
+![alt text](https://github.com/myaoo18/EC601-Visual-Question-Answering/blob/master/train_results//RetinaNet_resnet101_50epochs.png?raw=true)  
+
+RetinaNet with resnet 152:  
+![alt text](https://github.com/myaoo18/EC601-Visual-Question-Answering/blob/master/train_results//RetinaNet_resnet152_50epochs.png?raw=true)  
+
+## Citation
+#### Research paper this project is based on: 
+https://arxiv.org/pdf/1704.03162.pdf
+  
+#### Base code:
+https://github.com/Cyanogenoid/pytorch-vqa
+
+#### Test implementation:
+https://github.com/dukelin95/vqa_pytorch
