@@ -218,7 +218,7 @@ class CocoImages(data.Dataset):
     def _find_images(self):
         id_to_filename = {}
         for filename in os.listdir(self.path):
-            if not filename.endswith('.jpg'):
+            if not filename.endswith('.png'):
                 continue
             id_and_extension = filename.split('_')[-1]
             id = int(id_and_extension.split('.')[0])
