@@ -47,10 +47,10 @@ def run(net, loader, optimizer, tracker, train=False, prefix='', epoch=0):
             'volatile': not train,
             'requires_grad': False,
         }
-        v = Variable(v.cuda(async=True), **var_params)
-        q = Variable(q.cuda(async=True), **var_params)
-        a = Variable(a.cuda(async=True), **var_params)
-        q_len = Variable(q_len.cuda(async=True), **var_params)
+        v = Variable(v.cuda(non_blocking=True), **var_params)
+        q = Variable(q.cuda(non_blocking=True), **var_params)
+        a = Variable(a.cuda(non_blocking=True), **var_params)
+        q_len = Variable(q_len.cuda(non_blocking=True), **var_params)
 
         out = net(v, q, q_len)
         nll = -log_softmax(out)
@@ -73,7 +73,7 @@ def run(net, loader, optimizer, tracker, train=False, prefix='', epoch=0):
             accs.append(acc.view(-1))
             idxs.append(idx.view(-1).clone())
 
-        loss_tracker.append(loss.data[0])
+        loss_tracker.append(loss.data)
         # acc_tracker.append(acc.mean())
         for a in acc:
             acc_tracker.append(a.item())
