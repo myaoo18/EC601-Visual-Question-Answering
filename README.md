@@ -52,6 +52,10 @@ python train.py
 
 The default number of training epochs is 50 (indexed from 0 to 49). The result (`*.pth` file) will be saved to `logs` directory. You can plot diagram to visualize the result.
 
+
+## Implementation
+
+
 ## Set Backs
 
 Before successfully running the base model, we encountered several problems:
