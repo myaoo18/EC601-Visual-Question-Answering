@@ -56,13 +56,13 @@ The default number of training epochs is 50 (indexed from 0 to 49). The result (
 ## Implementation
 
 
-## Set Backs
+## Milestones
 
 Before successfully running the base model, we encountered several problems:
 
 * At first we ran the model on BU SCC platform without GPU cores, thus making the training speed extremely slow. Therefore, we switched to Google Colab to run base model. However, the connection to Colab is unstable and has limited training time, so that we cannot get the time-consuming training job done. Finally, we solved this issue by asking for GPU cores in the BU SCC platform, so we can use cuda to speed up the training process.
 * We encountered some permission issues when installing libraries and running the model on SCC platform, because the base model code involves a lot of reading and writing operations. We solved this by operating `chmod` on all files to give permissions.
-* As some of the code of base model is out of date, we modified these code when reimplementing it. Specifically, preprocess-images.py, config.py, data.py, train.py and utils.py.
+* As some of the code of the base model is out of date, we modified these code when reimplementing it. Specifically, preprocess-images.py, config.py, data.py, train.py and utils.py.
 
 ## Conclusion
 Resnet 50:  
