@@ -65,20 +65,23 @@ Before successfully running the base model, we encountered several problems:
 * As some of the code of the base model is out of date, we modified these code when reimplementing it. Specifically, preprocess-images.py, config.py, data.py, train.py and utils.py.
 
 ## Conclusion
-Resnet 50:  
+Resnet with resnet50:  
 ![alt text](https://github.com/myaoo18/EC601-Visual-Question-Answering/blob/master/train_results/ResNet_resnet50_50epoch.png?raw=true)  
 
-Resnet 101:  
+Resnet with resnet101:  
 ![alt text](https://github.com/myaoo18/EC601-Visual-Question-Answering/blob/master/train_results/ResNet_resnet101_50epoch.png?raw=true)  
 
-Resnet 152:  
+Resnet with resnet152:  
 ![alt text](https://github.com/myaoo18/EC601-Visual-Question-Answering/blob/master/train_results/ResNet_resnet152_50epoch.png?raw=true)  
 
-RetinaNet with resnet 101:  
+RetinaNet with resnet101:  
 ![alt text](https://github.com/myaoo18/EC601-Visual-Question-Answering/blob/master/train_results//RetinaNet_resnet101_50epochs.png?raw=true)  
 
-RetinaNet with resnet 152:  
-![alt text](https://github.com/myaoo18/EC601-Visual-Question-Answering/blob/master/train_results//RetinaNet_resnet152_50epochs.png?raw=true)  
+RetinaNet with resnet152:  
+![alt text](https://github.com/myaoo18/EC601-Visual-Question-Answering/blob/master/train_results//RetinaNet_resnet152_50epochs.png?raw=true) 
+
+Overall result comparison:
+![alt text](https://github.com/myaoo18/EC601-Visual-Question-Answering/blob/master/train_results//final_result.png?raw=true) 
 
 ## Citation
 #### Research paper this project is based on: 
