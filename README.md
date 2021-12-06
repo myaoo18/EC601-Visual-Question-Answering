@@ -6,7 +6,7 @@
 * Zifei Lu
 
 ## Overview
-This project aims to reimplement the baseline of VQA from Vahid Kazemi and Ali Elqursh’s paper, "Show, Ask, Attend, and Answer: A Strong Baseline For Visual Question Answering", by building upon the base code https://github.com/Cyanogenoid/pytorch-vqa and to advance the training model by using different modules such as resnet50, resnet101, resnet152, retinanet on resnet101 and retinanet on resnet152. We were able to compare the graphical results in train_results folder and found that the most efficient model was retinanet on resnet101. We then used the weight of this trained model and tested samples of image and question. Overall, this project improved the base code with a greater accuracy model, made changes to the upstream code with Cuda and excluding deprecated packages in mind, and implementation testing. 
+This project aims to reimplement the baseline of VQA from Vahid Kazemi and Ali Elqursh’s paper, "Show, Ask, Attend, and Answer: A Strong Baseline For Visual Question Answering", by building upon the base code https://github.com/Cyanogenoid/pytorch-vqa and to advance the training model by using different modules such as Resnet on resnet50, Resnet on resnet101, Resnet on resnet152, retinanet on resnet101 and retinanet on resnet152. We were able to compare the graphical results in train_results folder and found that the most efficient model was retinanet on resnet101. We then used the weight of this trained model and tested samples of image and question. Overall, this project improved the base code with a greater accuracy model, made changes to the upstream code with Cuda and excluding deprecated packages in mind, and implementation testing. 
 
 We would like to give our sincere gratitute to:
 * Vahid Kazemi and Ali Elqursh for their detailed paper
@@ -84,6 +84,8 @@ RetinaNet with resnet152:
 
 Overall result comparison:
 ![alt text](https://github.com/myaoo18/EC601-Visual-Question-Answering/blob/master/train_results//final_result.png?raw=true) 
+We successfully enahnced the base VQA model by changeing the object detection/classification model.<br />
+By using the RetinaNet as the objectdetection/classification model, we was able to achive a highter accuracy by using less layers than using the Resnet.
 
 ## Citation
 #### Research paper this project is based on: 
