@@ -55,6 +55,8 @@ The default number of training epochs is 50 (indexed from 0 to 49). The result (
 
 ## Implementation
 
+Our demo includes the function that the verbal input and output. For a given picture, customers can speak their question directly and our module would also output answer verbally.
+At the beginning, the demo shows that "I am listening". At this time, customer can speak question directly. After receiving and save question successfully, it will show "listening successfully". With the processing finished, the demo will output answer automatically.
 
 ## Milestones
 
