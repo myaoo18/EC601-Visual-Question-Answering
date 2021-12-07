@@ -95,5 +95,8 @@ https://arxiv.org/pdf/1704.03162.pdf
 #### Base code:
 https://github.com/Cyanogenoid/pytorch-vqa
 
+### RetinaNet Model:
+https://github.com/yhenon/pytorch-retinanet
+
 #### Test implementation:
 https://github.com/dukelin95/vqa_pytorch
