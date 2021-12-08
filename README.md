@@ -84,7 +84,7 @@ RetinaNet with resnet152:
 
 Overall result comparison:
 ![alt text](https://github.com/myaoo18/EC601-Visual-Question-Answering/blob/master/train_results//final_result.png?raw=true) 
-We successfully enahnced the base VQA model by changing the object detection/classification model.<br />
+We successfully enhanced the accuracy of the base VQA model by modifying the Object Detection model Architecture.<br />
 As shown in the graph above, RetinaNet with the backbone of resnet101 had a simular but higher accuaracy than the ResNet with the backbone of resnet152.
 By using the RetinaNet as the object detection/classification model, we were able to achive a highter accuracy by using less layers than when using the Resnet.
 
